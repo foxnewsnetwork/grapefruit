@@ -29,7 +29,17 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/', routes.index);
+app.get('/', function(req,res){ 
+	res.render("index.jade", { title : "Stuff"});	
+}); // end app.get
+
+app.get("/s/:name", function(req,res){ 
+	res.render("iframe.jade", { title : req.params.name } );
+}); // end app.get
+
+app.get("/p/:name", function(req,res){ 
+	res.redirect("http://" + req.params.name + ".heroku.com");
+}); // end app.get
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
